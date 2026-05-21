@@ -2,7 +2,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { NextResponse } from "next/server";
 import { CHAT_LOG_SYSTEM_PROMPT, type ChatMessage } from "@/lib/chat-log";
 
-const MODEL = "claude-3-5-sonnet-20241022";
+const MODEL = "claude-haiku-4-5-20251001";
 const MAX_TOKENS = 1000;
 
 function anthropicHttpStatus(err: unknown): number {
