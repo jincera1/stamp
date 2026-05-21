@@ -1,4 +1,4 @@
-/** Row shape from public.experiences */
+/** Row shape from public.stamps */
 export type Experience = {
   id: string;
   user_id: string;

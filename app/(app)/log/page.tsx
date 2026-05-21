@@ -57,7 +57,7 @@ export default function LogPage() {
 
       const row = buildExperienceInsert(userId, preview);
       const { error: insertError } = await supabase
-        .from("experiences")
+        .from("stamps")
         .insert(row);
 
       savingRef.current = false;
@@ -180,7 +180,7 @@ export default function LogPage() {
                   ) : null}
                   {msg.saved ? (
                     <p className="text-xs font-medium text-emerald-400">
-                      Saved to experiences
+                      Saved to stamps
                     </p>
                   ) : null}
                 </>

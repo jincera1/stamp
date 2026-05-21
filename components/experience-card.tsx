@@ -1,4 +1,4 @@
-import { formatExperienceDate, type Experience } from "@/lib/experiences";
+import { formatExperienceDate, type Experience } from "@/lib/stamps";
 
 export function ExperienceCard({
   experience,

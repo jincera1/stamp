@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AppPageShell } from "@/components/app-page-shell";
 import { PageEmpty, PageError, PageLoading } from "@/components/page-feedback";
-import { profileDisplayName, type Profile } from "@/lib/experiences";
+import { profileDisplayName, type Profile } from "@/lib/stamps";
 import { supabase } from "@/utils/supabase";
 
 export default function FriendsPage() {

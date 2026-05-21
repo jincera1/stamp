@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AppPageShell } from "@/components/app-page-shell";
 import { PageError, PageLoading } from "@/components/page-feedback";
-import type { Profile } from "@/lib/experiences";
+import type { Profile } from "@/lib/stamps";
 import { supabase } from "@/utils/supabase";
 
 export default function ProfilePage() {

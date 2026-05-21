@@ -4,11 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import { AppPageShell } from "@/components/app-page-shell";
 import { ExperienceCard } from "@/components/experience-card";
 import { PageEmpty, PageError, PageLoading } from "@/components/page-feedback";
-import type { Experience } from "@/lib/experiences";
+import type { Experience } from "@/lib/stamps";
 import { supabase } from "@/utils/supabase";
 
 export default function ArchivePage() {
-  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [stamps, setstamps] = useState<Experience[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +17,7 @@ export default function ArchivePage() {
     setError(null);
 
     const { data, error: fetchError } = await supabase
-      .from("experiences")
+      .from("stamps")
       .select(
         "id, user_id, title, description, place, tags, occurred_at, created_at"
       )
@@ -29,11 +29,11 @@ export default function ArchivePage() {
 
     if (fetchError) {
       setError(fetchError.message);
-      setExperiences([]);
+      setstamps([]);
       return;
     }
 
-    setExperiences((data ?? []) as Experience[]);
+    setstamps((data ?? []) as Experience[]);
   }, []);
 
   useEffect(() => {
@@ -67,16 +67,16 @@ export default function ArchivePage() {
       <div className="px-4 pb-8">
         {loading ? <PageLoading label="Loading your archive…" /> : null}
         {!loading && error ? <PageError message={error} /> : null}
-        {!loading && !error && experiences.length === 0 ? (
+        {!loading && !error && stamps.length === 0 ? (
           <PageEmpty
             title="Your archive is empty"
             description="Log a stamp on the + tab and confirm the preview to save it here."
           />
         ) : null}
 
-        {!loading && !error && experiences.length > 0 ? (
+        {!loading && !error && stamps.length > 0 ? (
           <ul className="space-y-3">
-            {experiences.map((exp) => (
+            {stamps.map((exp) => (
               <li key={exp.id}>
                 <ExperienceCard experience={exp} />
               </li>

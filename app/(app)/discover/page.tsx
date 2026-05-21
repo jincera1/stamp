@@ -8,12 +8,12 @@ import {
   profileDisplayName,
   type Experience,
   type Profile,
-} from "@/lib/experiences";
+} from "@/lib/stamps";
 import { supabase } from "@/utils/supabase";
 
 export default function DiscoverPage() {
   const [userId, setUserId] = useState<string | null>(null);
-  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [stamps, setstamps] = useState<Experience[]>([]);
   const [profilesById, setProfilesById] = useState<Record<string, Profile>>({});
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function DiscoverPage() {
     setError(null);
 
     const { data: rows, error: fetchError } = await supabase
-      .from("experiences")
+      .from("stamps")
       .select(
         "id, user_id, title, description, place, tags, occurred_at, created_at"
       )
@@ -34,14 +34,14 @@ export default function DiscoverPage() {
 
     if (fetchError) {
       setError(fetchError.message);
-      setExperiences([]);
+      setstamps([]);
       setProfilesById({});
       setLoading(false);
       return;
     }
 
     const list = (rows ?? []) as Experience[];
-    setExperiences(list);
+    setstamps(list);
 
     const authorIds = [...new Set(list.map((e) => e.user_id))];
     if (authorIds.length === 0) {
@@ -92,8 +92,8 @@ export default function DiscoverPage() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return experiences;
-    return experiences.filter((e) => {
+    if (!q) return stamps;
+    return stamps.filter((e) => {
       const haystack = [
         e.title,
         e.description,
@@ -104,7 +104,7 @@ export default function DiscoverPage() {
         .toLowerCase();
       return haystack.includes(q);
     });
-  }, [experiences, query]);
+  }, [stamps, query]);
 
   return (
     <div>
@@ -128,12 +128,12 @@ export default function DiscoverPage() {
         {!loading && !error && filtered.length === 0 ? (
           <PageEmpty
             title={
-              experiences.length === 0
+              stamps.length === 0
                 ? "No stamps to discover yet"
                 : "No matches for your search"
             }
             description={
-              experiences.length === 0
+              stamps.length === 0
                 ? "When others log stamps, they will show up here. Log your own on the + tab."
                 : "Try a different keyword or clear the search box."
             }

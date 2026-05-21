@@ -1,5 +1,5 @@
 import type { ExperiencePreview } from "@/lib/chat-log";
-import { formatExperienceDate } from "@/lib/experiences";
+import { formatExperienceDate } from "@/lib/stamps";
 
 export function ExperiencePreviewCard({
   preview,
